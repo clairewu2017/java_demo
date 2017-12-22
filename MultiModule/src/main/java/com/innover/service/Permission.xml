@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.innover.service.Permission">
+        <table name="Permission" schema="dbo" catalog="moocprojectv2"/>
+        <attributes>
+            <id name="id">
+                <column name="Id" precision="-1"/>
+            </id>
+            <basic name="roleId">
+                <column name="RoleId" precision="-1"/>
+            </basic>
+            <basic name="permissionDefinitionId">
+                <column name="PermissionDefinitionId" precision="-1"/>
+            </basic>
+            <many-to-one name="roleByRoleId" optional="true" target-entity="com.innover.service.Role">
+                <join-column name="RoleId" referenced-column-name="Id"/>
+            </many-to-one>
+            <many-to-one name="permissionDefinitionByPermissionDefinitionId" optional="true"
+                         target-entity="com.innover.service.PermissionDefinition">
+                <join-column name="PermissionDefinitionId" referenced-column-name="Id"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

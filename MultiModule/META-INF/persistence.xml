@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="persistenceUnit">
+        <mapping-file>com/innover/service/Permission.xml</mapping-file>
+        <mapping-file>com/innover/service/PermissionDefinition.xml</mapping-file>
+        <mapping-file>com/innover/service/Role.xml</mapping-file>
+        <mapping-file>com/innover/service/User.xml</mapping-file>
+        <mapping-file>com/innover/service/UserOldPassword.xml</mapping-file>
+        <mapping-file>com/innover/service/UserRoles.xml</mapping-file>
+        <mapping-file>com/innover/data/Permission.xml</mapping-file>
+        <mapping-file>com/innover/data/PermissionDefinition.xml</mapping-file>
+        <mapping-file>com/innover/data/Role.xml</mapping-file>
+        <mapping-file>com/innover/data/User.xml</mapping-file>
+        <mapping-file>com/innover/data/UserOldPassword.xml</mapping-file>
+        <mapping-file>com/innover/data/UserRoles.xml</mapping-file>
+        <class>com.innover.service.Permission</class>
+        <class>com.innover.service.PermissionDefinition</class>
+        <class>com.innover.service.Role</class>
+        <class>com.innover.service.User</class>
+        <class>com.innover.service.UserOldPassword</class>
+        <class>com.innover.service.UserRoles</class>
+        <class>com.innover.data.Permission</class>
+        <class>com.innover.data.PermissionDefinition</class>
+        <class>com.innover.data.Role</class>
+        <class>com.innover.data.User</class>
+        <class>com.innover.data.UserOldPassword</class>
+        <class>com.innover.data.UserRoles</class>
+        <properties>
+            <property name="eclipselink.jdbc.url" value="jdbc:sqlserver://192.168.200.13;databaseName=chunmeitest1"/>
+            <property name="eclipselink.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        </properties>
+    </persistence-unit>
+</persistence>

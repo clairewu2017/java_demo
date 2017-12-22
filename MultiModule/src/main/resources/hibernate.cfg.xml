@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:sqlserver://192.168.200.13;databaseName=chunmeitest1</property>
+    <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+      <mapping class="com.innover.service.User"/>
+      <mapping resource="com/innover/service/User.hbm.xml"/>
+      <mapping resource="com/innover/service/UserRoles.hbm.xml"/>
+      <mapping class="com.innover.service.UserRoles"/>
+      <mapping resource="com/innover/service/Permission.hbm.xml"/>
+      <mapping class="com.innover.service.Permission"/>
+      <mapping resource="com/innover/service/PermissionDefinition.hbm.xml"/>
+      <mapping class="com.innover.service.PermissionDefinition"/>
+      <mapping class="com.innover.service.Role"/>
+      <mapping resource="com/innover/service/Role.hbm.xml"/>
+      <mapping class="com.innover.service.UserOldPassword"/>
+      <mapping resource="com/innover/service/UserOldPassword.hbm.xml"/>
+      <mapping resource="com/innover/data/Permission.hbm.xml"/>
+      <mapping class="com.innover.data.Permission"/>
+      <mapping resource="com/innover/data/PermissionDefinition.hbm.xml"/>
+      <mapping class="com.innover.data.PermissionDefinition"/>
+      <mapping resource="com/innover/data/Role.hbm.xml"/>
+      <mapping class="com.innover.data.Role"/>
+      <mapping resource="com/innover/data/User.hbm.xml"/>
+      <mapping class="com.innover.data.User"/>
+      <mapping resource="com/innover/data/UserOldPassword.hbm.xml"/>
+      <mapping class="com.innover.data.UserOldPassword"/>
+      <mapping resource="com/innover/data/UserRoles.hbm.xml"/>
+      <mapping class="com.innover.data.UserRoles"/>
+      <mapping class="com.innover.data2.Permission"/>
+      <mapping resource="com/innover/data2/Permission.hbm.xml"/>
+      <mapping resource="com/innover/data2/PermissionDefinition.hbm.xml"/>
+      <mapping class="com.innover.data2.PermissionDefinition"/>
+      <mapping resource="com/innover/data2/Role.hbm.xml"/>
+      <mapping class="com.innover.data2.Role"/>
+      <mapping resource="com/innover/data2/User.hbm.xml"/>
+      <mapping class="com.innover.data2.User"/>
+      <mapping class="com.innover.data2.UserOldPassword"/>
+      <mapping resource="com/innover/data2/UserOldPassword.hbm.xml"/>
+      <mapping resource="com/innover/data2/UserRoles.hbm.xml"/>
+      <mapping class="com.innover.data2.UserRoles"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

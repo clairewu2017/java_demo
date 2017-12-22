@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.innover.service.User">
+        <table name="User" schema="dbo" catalog="moocprojectv2"/>
+        <attributes>
+            <id name="userName">
+                <column name="UserName"/>
+            </id>
+            <basic name="password">
+                <column name="Password"/>
+            </basic>
+            <basic name="lastName">
+                <column name="LastName"/>
+            </basic>
+            <basic name="firstName">
+                <column name="FirstName"/>
+            </basic>
+            <basic name="sex">
+                <column name="Sex" precision="-1"/>
+            </basic>
+            <basic name="birthDay">
+                <column name="BirthDay" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="origin">
+                <column name="Origin" nullable="false" length="50"/>
+            </basic>
+            <basic name="idCard">
+                <column name="IdCard" nullable="false" length="50"/>
+            </basic>
+            <basic name="address">
+                <column name="Address" nullable="false"/>
+            </basic>
+            <basic name="tel">
+                <column name="Tel" nullable="false" length="50"/>
+            </basic>
+            <basic name="email">
+                <column name="Email" nullable="false" length="50"/>
+            </basic>
+            <basic name="changed">
+                <column name="Changed" precision="-1"/>
+            </basic>
+            <basic name="created">
+                <column name="Created" precision="-1"/>
+            </basic>
+            <basic name="deleted">
+                <column name="Deleted" precision="-1"/>
+            </basic>
+            <basic name="timeout">
+                <column name="Timeout" precision="-1"/>
+            </basic>
+            <basic name="expires">
+                <column name="Expires" precision="-1"/>
+            </basic>
+            <basic name="expiredate">
+                <column name="Expiredate" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="passwdChanged">
+                <column name="PasswdChanged" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="passwordviolations">
+                <column name="Passwordviolations" precision="-1"/>
+            </basic>
+            <basic name="lastSignInDate">
+                <column name="LastSignInDate" nullable="false" precision="-1"/>
+            </basic>
+            <one-to-many name="userOldPasswordsByUserName" mapped-by="userByUserName"
+                         target-entity="com.innover.service.UserOldPassword"/>
+            <one-to-many name="userRolesByUserName" mapped-by="userByUserName"
+                         target-entity="com.innover.service.UserRoles"/>
+        </attributes>
+    </entity>
+</entity-mappings>
