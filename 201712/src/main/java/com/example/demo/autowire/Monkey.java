@@ -1,12 +1,12 @@
-package com.example.demo;
+package com.example.demo.autowire;
 
 /**
  * Created by chunmei on 12/21/2017.
  */
-public class Tiger {
+public class Monkey {
     @Override
     public String toString()
     {
-        return "tiger";
+        return "monkey";
     }
 }
