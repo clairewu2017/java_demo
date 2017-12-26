@@ -64,6 +64,15 @@ public class User {
         this.email = email;
     }
 
+    public User() {
+    }
+
+    public User(User user) {
+        this.id = user.id;
+        this.userName = user.userName;
+        this.email = user.email;
+        this.password = user.password;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

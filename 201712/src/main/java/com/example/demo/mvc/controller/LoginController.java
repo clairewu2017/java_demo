@@ -39,7 +39,7 @@ public class LoginController {
 		return "editUserList";
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public User add() {
 		User user = new User();
 		user.setEmail("chunmei@innover.com");
@@ -50,7 +50,7 @@ public class LoginController {
 		return user;
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	public User select() throws InterruptedException {
 		return userService.getUserByEmail("chunmei@innover.com");
 	}
