@@ -11,7 +11,7 @@ import java.lang.annotation.Annotation;
 
 
 @SpringBootApplication
-public class AutowireApplication {
+public class TestApplication {
 
 	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
 
@@ -37,9 +37,8 @@ public class AutowireApplication {
 				System.out.println(name.community() + " " + name.originate());
 			}
 		}
-
 		// annotation end----------
 
-		SpringApplication.run(AutowireApplication.class, args);
+		SpringApplication.run(TestApplication.class, args);
 	}
 }
