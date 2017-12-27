@@ -16,13 +16,17 @@
 package com.example.demo.mvc.repository;
 
 import com.example.demo.mvc.model.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  * Allows managing {@link User} instances.
  *
  *
  */
-public interface UserRepository extends CrudRepository<User, Long> {
+
+//自动生成相应的GET POST 请求
+@RepositoryRestResource(collectionResourceRel = "user", path="user")
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     User findByEmail(String email);
 }
