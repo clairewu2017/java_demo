@@ -15,9 +15,13 @@
  */
 package com.example.demo.mvc.repository;
 
+import com.example.demo.mvc.model.Permission;
 import com.example.demo.mvc.model.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.List;
 
 /**
  * Allows managing {@link User} instances.
@@ -26,10 +30,16 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  */
 
 //自动生成相应的GET POST 请求
-@RepositoryRestResource(collectionResourceRel = "user", path="user")
-public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+@RepositoryRestResource(collectionResourceRel = "permission", path="permission")
+public interface PermissionRepository extends PagingAndSortingRepository<Permission, Long> {
 
-    User findByEmail(String email);
+    @Query(value = "select p.name from permission p join role_permission rp on p.id = rp.permission_id\n" +
+            " join user_role ur on rp.role_id = ur.role_id" +
+            " where ur.user_id  = ?1", nativeQuery = true)
+    List<String> findByUser(long userId);
 
 }
+
+
+
 

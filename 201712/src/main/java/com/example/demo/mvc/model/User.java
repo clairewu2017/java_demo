@@ -1,20 +1,23 @@
 package com.example.demo.mvc.model;
 
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.*;
 
 /**
  * Created by chunmei on 12/22/2017.
  */
 @Entity
-@Table(name = "t_user", schema = "dbo", catalog = "logindemo")
+@Table(name = "usr")
 public class User {
     private long id;
-    private String location;
-    private String password;
     private String userName;
+    private String password;
     private String email;
+    private String location;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public long getId() {
         return id;

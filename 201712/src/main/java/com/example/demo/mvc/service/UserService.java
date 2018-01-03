@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by chunmei on 8/9/2017.
  */
-//@Service
+
 @Service
 public class UserService {
     @Autowired
@@ -23,6 +23,11 @@ public class UserService {
 
     @Cacheable("users")
     public User getUserByEmail(String email) throws InterruptedException {
+        Iterable<User> users = userRepository.findAll();
+        for (User user:
+            users ) {
+            System.out.printf(user.getUserName());
+        }
         return userRepository.findByEmail(email);
     }
 

@@ -17,6 +17,7 @@ package com.example.demo.security;
 
 
 import com.example.demo.mvc.model.User;
+import com.example.demo.mvc.repository.PermissionRepository;
 import com.example.demo.mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,34 +28,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Rob Winch
- *
  */
 @Service
-public class UserRepositoryUserDetailsService implements UserDetailsService {
-    private final UserRepository userRepository;
+public class CustomizedUserDetailsService implements UserDetailsService {
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
-    public UserRepositoryUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private PermissionRepository permissionRepository;
 
-    /* (non-Javadoc)
-     * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
-     */
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Could not find user " + username);
         }
         return new CustomUserDetails(user);
     }
 
-    private final static class CustomUserDetails extends User implements UserDetails {
+    private final class CustomUserDetails extends User implements UserDetails {
 
         private CustomUserDetails(User user) {
             super(user);
@@ -62,8 +59,9 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            // Ideally role should be fetched from database and populated instance of
-            return AuthorityUtils.createAuthorityList("ROLE_USER");
+            List<String> permissionList = permissionRepository.findByUser(this.getId());
+            String[] permissionArray = permissionList.toArray(new String[0]);
+            return AuthorityUtils.createAuthorityList(permissionArray);
         }
 
         @Override

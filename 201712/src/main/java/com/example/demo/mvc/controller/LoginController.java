@@ -20,8 +20,9 @@ import com.example.demo.mvc.model.User;
 import com.example.demo.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+//可以自动将类User转换成Json结果
 
 @Controller
 public class LoginController {
@@ -34,24 +35,33 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String list() {
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String list(){
 		return "editUserList";
+
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public User add() {
-		User user = new User();
-		user.setEmail("chunmei@innover.com");
-		user.setUserName("chunmei");
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home() {
+		return "home";
+	}
 
-		user.setPassword("password");
+
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public User add(String email, String userName, String password) {
+		User user = new User();
+		user.setEmail(email);
+		user.setUserName(userName);
+		user.setPassword(password);
 		userService.CreateUser(user);
 		return user;
 	}
 
-	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public User select() throws InterruptedException {
-		return userService.getUserByEmail("chunmei@innover.com");
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	//自动将User转为rest response
+	@ResponseBody
+	public User select(@RequestParam(value="email") String email) throws InterruptedException {
+		User user = userService.getUserByEmail(email);
+		return  user;
 	}
 }
