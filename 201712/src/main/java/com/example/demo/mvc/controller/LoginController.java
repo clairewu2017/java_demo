@@ -20,10 +20,13 @@ import com.example.demo.mvc.model.User;
 import com.example.demo.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 //可以自动将类User转换成Json结果
-
 @Controller
 public class LoginController {
 
@@ -36,9 +39,11 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public String list(){
+	//可以使用Model, Map,或者ModelAndView来和html template交互
+	public String list(Model model){
+		model.addAttribute("employeeList", userService.getAll());
+		model.addAttribute("user", new User());
 		return "editUserList";
-
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)

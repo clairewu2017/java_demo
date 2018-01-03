@@ -6,6 +6,9 @@ import com.example.demo.mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
 
 /**
  * Created by chunmei on 8/9/2017.
@@ -16,6 +19,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @ModelAttribute("employeeList")
+    public List<User> getAll()
+    {
+        return (List<User>) userRepository.findAll();
+    }
 
     public void CreateUser(User user) {
         userRepository.save(user);
