@@ -37,6 +37,7 @@ public class WebSecurityConfig
         http
             .authorizeRequests()
                 .antMatchers("/resources/**", "/signup").permitAll()
+                 .antMatchers("/buy/users").hasAuthority("create_user")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -44,7 +45,10 @@ public class WebSecurityConfig
                 .permitAll()
                 .and()
             .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .rememberMe()//启用记住我功能
+                .tokenValiditySeconds(2419200);
     }
 
     @Autowired

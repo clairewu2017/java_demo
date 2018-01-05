@@ -1,18 +1,19 @@
 package com.example.demo.mvc.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by chunmei on 1/2/2018.
+ * Created by chunmei on 1/4/2018.
  */
 @Entity
-@Table(name = "role")
 public class Role {
     private long id;
     private String name;
+    private Collection<RolePermission> rolePermissionsById;
+    private Collection<UserRole> userRolesById;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public long getId() {
         return id;
@@ -50,5 +51,23 @@ public class Role {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "role")
+    public Collection<RolePermission> getRolePermissionsById() {
+        return rolePermissionsById;
+    }
+
+    public void setRolePermissionsById(Collection<RolePermission> rolePermissionsById) {
+        this.rolePermissionsById = rolePermissionsById;
+    }
+
+    @OneToMany(mappedBy = "role")
+    public Collection<UserRole> getUserRolesById() {
+        return userRolesById;
+    }
+
+    public void setUserRolesById(Collection<UserRole> userRolesById) {
+        this.userRolesById = userRolesById;
     }
 }

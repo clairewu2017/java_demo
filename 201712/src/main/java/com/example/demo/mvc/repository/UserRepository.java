@@ -17,7 +17,10 @@ package com.example.demo.mvc.repository;
 
 import com.example.demo.mvc.model.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.List;
 
 /**
  * Allows managing {@link User} instances.
@@ -28,8 +31,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 //自动生成相应的GET POST 请求
 @RepositoryRestResource(collectionResourceRel = "user", path="user")
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
-
-    User findByEmail(String email);
-
+    //如果需要外部能通过url直接测试此方法，需要加上@Param("email")
+    //http://localhost:8084/api/user/search/findByEmail?email=1@email.com
+    User findByEmail(@Param("email") String email);
+    List<User> findAllByUserNameEqualsAndEmailEquals(String userName, String email);
+    List<User> findUsersByEmailContains(String email);
 }
-

@@ -2,12 +2,16 @@ package com.example.demo.mvc.service;
 
 
 import com.example.demo.mvc.model.User;
+import com.example.demo.mvc.repository.PermissionRepository;
 import com.example.demo.mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,6 +22,8 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     @ModelAttribute("employeeList")
     public List<User> getAll()
@@ -25,7 +31,11 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
-    public void CreateUser(User user) {
+    public void delete(long id) {
+        userRepository.delete(id);
+    }
+
+    public void createUser(User user) {
         userRepository.save(user);
     }
 
@@ -37,6 +47,12 @@ public class UserService {
             System.out.printf(user.getUserName());
         }
         return userRepository.findByEmail(email);
+    }
+
+    public Collection<? extends GrantedAuthority> getPermissions(long id) {
+        List<String> permissionList = permissionRepository.findByUser(id);
+        String[] permissionArray = permissionList.toArray(new String[0]);
+        return AuthorityUtils.createAuthorityList(permissionArray);
     }
 
 }

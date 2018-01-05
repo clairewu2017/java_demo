@@ -1,0 +1,55 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:security="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Demo</title>
+</head>
+<body>
+<div>
+    <h2>Employee Management Screen</h2>
+    <!--<form method="post" action="/add" th:object="${user}">-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<td><form:label path="firstname"><spring:message code="label.firstname"/></form:label></td>-->
+    <!--<td><form:input path="firstname" /></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td><form:label path="lastname"><spring:message code="label.lastname"/></form:label></td>-->
+    <!--<td><form:input path="lastname" /></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td><form:label path="email"><spring:message code="label.email"/></form:label></td>-->
+    <!--<td><form:input path="email" /></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td><form:label path="telephone"><spring:message code="label.telephone"/></form:label></td>-->
+    <!--<td><form:input path="telephone" /></td>-->
+    <!--</tr>-->
+
+    <!--</table>-->
+    <!--</form>-->
+    <!--&lt;!&ndash;<iframe src="editUserList.jsp"></iframe>&ndash;&gt;-->
+    <!--<h3>Employees</h3>-->
+    <table class="data">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>&nbsp;</th>
+        </tr>
+        <th:block th:each="emp : ${employeeList}">
+            <tr>
+                <td th:text="${emp.userName}"> name</td>
+                <td th:text="${emp.email}"> email</td>
+                <td th:text="${emp.location}"> location</td>
+                <security:authorize ifAllGranted="create_user">
+                    <tr>
+                        <td><a href="/buy/user/${emp.id}" th:action="Delete">delete</a></td>
+                    </tr>
+                </security:authorize>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>

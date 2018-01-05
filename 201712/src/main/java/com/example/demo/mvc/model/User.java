@@ -1,23 +1,34 @@
 package com.example.demo.mvc.model;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by chunmei on 12/22/2017.
+ * Created by chunmei on 1/4/2018.
  */
 @Entity
 @Table(name = "usr")
 public class User {
     private long id;
-    private String userName;
-    private String password;
     private String email;
     private String location;
+    private String password;
+    private String userName;
+    private Collection<UserRole> userRoles;
+
+    public User(User user) {
+        id = user.getId();
+        email = user.getEmail();
+        location = user.getLocation();
+        password = user.getPassword();
+        userName = user.getUserName();
+    }
+
+    public User() {
+
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public long getId() {
         return id;
@@ -25,6 +36,16 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "email", nullable = false, length = 255)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Basic
@@ -48,7 +69,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_name", nullable = false, length = 255)
+    @Column(name = "username", nullable = false, length = 255)
     public String getUserName() {
         return userName;
     }
@@ -57,25 +78,6 @@ public class User {
         this.userName = userName;
     }
 
-    @Basic
-    @Column(name = "email", nullable = true, length = 255)
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public User() {
-    }
-
-    public User(User user) {
-        this.id = user.id;
-        this.userName = user.userName;
-        this.email = user.email;
-        this.password = user.password;
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,10 +86,10 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (location != null ? !location.equals(user.location) : user.location != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
 
         return true;
     }
@@ -95,10 +97,19 @@ public class User {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Collection<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

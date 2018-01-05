@@ -16,57 +16,22 @@
 package com.example.demo.mvc.controller;
 
 
-import com.example.demo.mvc.model.User;
-import com.example.demo.mvc.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 //可以自动将类User转换成Json结果
 @Controller
 public class LoginController {
 
-	@Autowired
-	private UserService userService;
-
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	//可以使用Model, Map,或者ModelAndView来和html template交互
-	public String list(Model model){
-		model.addAttribute("employeeList", userService.getAll());
-		model.addAttribute("user", new User());
-		return "editUserList";
-	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "home";
 	}
 
-
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public User add(String email, String userName, String password) {
-		User user = new User();
-		user.setEmail(email);
-		user.setUserName(userName);
-		user.setPassword(password);
-		userService.CreateUser(user);
-		return user;
-	}
-
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	//自动将User转为rest response
-	@ResponseBody
-	public User select(@RequestParam(value="email") String email) throws InterruptedException {
-		User user = userService.getUserByEmail(email);
-		return  user;
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
 	}
 }

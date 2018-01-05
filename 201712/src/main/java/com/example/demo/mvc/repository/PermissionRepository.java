@@ -16,15 +16,18 @@
 package com.example.demo.mvc.repository;
 
 import com.example.demo.mvc.model.Permission;
-import com.example.demo.mvc.model.User;
+import com.example.demo.mvc.model.RolePermission;
+import com.sun.istack.internal.Nullable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
- * Allows managing {@link User} instances.
+ * Allows managing {@link Permission} instances.
  *
  *
  */
@@ -33,10 +36,15 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "permission", path="permission")
 public interface PermissionRepository extends PagingAndSortingRepository<Permission, Long> {
 
-    @Query(value = "select p.name from permission p join role_permission rp on p.id = rp.permission_id\n" +
+    @Transactional
+    @Nullable
+    @Query(value = "select p.code_name from permission p join role_permission rp on p.id = rp.permission_id\n" +
             " join user_role ur on rp.role_id = ur.role_id" +
             " where ur.user_id  = ?1", nativeQuery = true)
     List<String> findByUser(long userId);
+
+    // traversal x.address.zipCode, 不过我的例子不合适
+    //List<Permission> findAllByRolePermissionsRole(Collection<RolePermission> rolePermissionsById);
 
 }
 

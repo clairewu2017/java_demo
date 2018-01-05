@@ -3,15 +3,16 @@ package com.example.demo.mvc.model;
 import javax.persistence.*;
 
 /**
- * Created by chunmei on 1/2/2018.
+ * Created by chunmei on 1/4/2018.
  */
 @Entity
 @Table(name = "user_role")
 public class UserRole {
     private long id;
+    private User user;
+    private Role role;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public long getId() {
         return id;
@@ -36,5 +37,25 @@ public class UserRole {
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
