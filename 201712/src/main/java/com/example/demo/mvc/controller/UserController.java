@@ -3,6 +3,8 @@ package com.example.demo.mvc.controller;
 import com.example.demo.mvc.model.User;
 import com.example.demo.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,14 @@ public class UserController {
     public String list(Model model){
         model.addAttribute("employeeList", userService.getAll());
         model.addAttribute("user", new User());
+        return "user";
+    }
+
+    @RequestMapping(value="/buy/users_page", params = {"page", "size"}, method = RequestMethod.GET)
+    public String ListPage(@RequestParam("page") int page, @RequestParam("size") int size, Model model)
+    {
+        Page<User> list = userService.getAllByPage(new PageRequest(page, size));
+        model.addAttribute("employeeList", list);
         return "user";
     }
 

@@ -6,11 +6,13 @@ import com.example.demo.mvc.repository.PermissionRepository;
 import com.example.demo.mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import org.springframework.data.domain.Pageable;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,6 +33,13 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
+
+    //示例：分页支持
+    public Page<User> getAllByPage(Pageable pageable)
+    {
+        return userRepository.findAll(pageable);
+    }
+
     public void delete(long id) {
         userRepository.delete(id);
     }
@@ -41,6 +50,7 @@ public class UserService {
 
     @Cacheable("users")
     public User getUserByEmail(String email) throws InterruptedException {
+
         Iterable<User> users = userRepository.findAll();
         for (User user:
             users ) {
