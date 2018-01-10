@@ -16,6 +16,11 @@ public class ConcurrentCalculator2 {
     public ConcurrentCalculator2() {
         cpuCoreNumber = Runtime.getRuntime().availableProcessors();
         exec = Executors.newFixedThreadPool(cpuCoreNumber);
+        ((ThreadPoolExecutor)exec).setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
+        ((ThreadPoolExecutor)exec).setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        ((ThreadPoolExecutor)exec).setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardOldestPolicy());
+        ((ThreadPoolExecutor)exec).setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
+
         completionService = new ExecutorCompletionService<Long>(exec);
 
 
