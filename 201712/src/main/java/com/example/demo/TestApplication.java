@@ -5,6 +5,8 @@ import com.example.demo.aop.Test;
 import com.example.demo.autowire.Zoo;
 import com.example.demo.concurrent.ConcurrentCalculator;
 import com.example.demo.concurrent.ConcurrentCalculator2;
+import com.example.demo.java8.MyOptional;
+import com.example.demo.java8.MyStreamGroupBy;
 import com.example.demo.mvc.model.Role;
 import com.example.demo.mvc.model.User;
 import com.example.demo.mvc.repository.UserRepository;
@@ -25,6 +27,12 @@ import java.util.List;
 @EnableCaching
 public class TestApplication {
 	public static void main(String[] args) throws Exception {
+
+		//java8 test -------
+		new MyStreamGroupBy().test();
+		new MyOptional().test();
+		//java8 test -------
+
 
 		// concurrent test -------
 		ConcurrentCalculator2 calculator = new ConcurrentCalculator2();

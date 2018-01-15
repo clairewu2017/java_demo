@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
  */
 //来自于lombok
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Data
 public class Employee {

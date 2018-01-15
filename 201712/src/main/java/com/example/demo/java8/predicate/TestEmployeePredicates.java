@@ -34,5 +34,8 @@ public class TestEmployeePredicates {
 
         //Employees other than above collection of "isAgeMoreThan(35)" can be get using negate()
         System.out.println(filterEmployees(employees, isAgeMoreThan(35).negate()));
+
+
+
     }
 }

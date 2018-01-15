@@ -1,6 +1,7 @@
 package com.example.demo.java8;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by chunmei on 1/10/2018.
@@ -64,6 +65,9 @@ public class MyStream {
 
         reduced.ifPresent(System.out::println);
         // "aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2"
+
+
+
     }
 
     //串行stream, 899 ms
@@ -94,4 +98,7 @@ public class MyStream {
         long count = values.parallelStream().sorted().count();
         System.out.println(count);
     }
+
+
+
 }
