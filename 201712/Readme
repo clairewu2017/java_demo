@@ -1,0 +1,9 @@
+在hosts文件中配置下面行来模拟不同机器
+127.0.0.1 discovery config-server gateway movie user feign ribbon
+127.0.0.1 peer1 peer2
+允许两次eureka-server工程来保证高可用（Run/Debug configurations->JAR application：
+java -jar microservice-discovery-eureka-0.0.1-SNAPSHOT.jar --spring.profiles.active=peer1
+java -jar microservice-discovery-eureka-0.0.1-SNAPSHOT.jar --spring.profiles.active=peer2
+测试负载均衡时，启动命令里面加入参数'--server.port=8085
+
+!!重要：Zuul和Feign的pom.xml里面别忘了包括eureka
