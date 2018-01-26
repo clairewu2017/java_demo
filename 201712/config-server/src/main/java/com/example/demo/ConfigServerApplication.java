@@ -3,15 +3,15 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
-@EnableFeignClients
+@EnableConfigServer
 @EnableDiscoveryClient
 
-public class ServiceFeignApplication {
+public class ConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceFeignApplication.class, args);
+		SpringApplication.run(ConfigServerApplication.class, args);
 	}
 }

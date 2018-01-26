@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserFeignController {
 
-    //@Qualifier("userServiceHystric")
+    @Qualifier("userServiceHystric")
     @Autowired
     UserFeignClient userFeignClient;
     @RequestMapping(value = "/login",method = RequestMethod.GET)
